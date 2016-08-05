@@ -33,8 +33,10 @@ function trim!(x::RealArray, p::Real=0.2)
     n > 0 || error("x can not be empty.")
     0 <= p < 0.5 || error("p must be in 0 <= p < 0.5.")
     g = floor(Int, n * p)
+    deleteat!(x, 1:g)
+    deleteat!(x, (n-g+1):end)
     
-    return select!(x, (g+1):(n-g))
+    return x
 end
 
 """
